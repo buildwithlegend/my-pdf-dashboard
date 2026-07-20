@@ -32,10 +32,10 @@ if uploaded_file and api_key:
         st.subheader("🤖 AI 對話與分析")
         
         try:
-            # 修改處：使用完整路徑格式以解決 404 錯誤
-            # 請務必將 "你的專案ID" 替換成你的真實 Project ID
+            # 【關鍵修正】：使用最標準的 AI Studio 初始化方式
+            # 不要指定 location 或完整路徑，讓 SDK 自動對接 Google AI Studio
             llm = ChatGoogleGenerativeAI(
-                model="projects/你的專案ID/locations/asia-east1/publishers/google/models/gemini-1.5-flash",
+                model="gemini-1.5-flash",
                 google_api_key=api_key
             )
             
