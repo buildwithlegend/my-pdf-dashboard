@@ -34,8 +34,8 @@ if uploaded_file:
         try:
             # 使用已寫入的 API Key 初始化
             llm = ChatGoogleGenerativeAI(
-                model="gemini-1.5-flash",
-                google_api_key=API_KEY
+    model="gemini-2.5-flash",
+    google_api_key=API_KEY
             )
             
             user_query = st.text_input("請輸入問題")
