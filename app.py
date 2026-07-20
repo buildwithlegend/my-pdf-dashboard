@@ -7,7 +7,7 @@ st.set_page_config(page_title="PDF 智慧閱讀與自動化 Dashboard", layout="
 st.title("📊 PDF 智慧閱讀與自動化儀表板")
 
 # 2. 已設定的 API Key
-API_KEY = "AQ.Ab8RN6KKkUeD-Uo6ZoqH5TUHMxvWrwwyezGrwEnNTq6QV3ur2g"
+API_KEY = "AQ.Ab8RN6J659uJkjOnk7VlP-04NiZwPu7SQrjoEgM8gIjJdh6o7Q"
 
 # 3. 側邊欄：檔案上傳
 uploaded_file = st.sidebar.file_uploader("上傳您的 PDF 檔案", type="pdf")
