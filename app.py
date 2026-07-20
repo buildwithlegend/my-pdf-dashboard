@@ -6,7 +6,7 @@ from pypdf import PdfReader
 st.set_page_config(page_title="PDF 智慧閱讀與自動化 Dashboard", layout="wide")
 st.title("📊 PDF 智慧閱讀與自動化儀表板")
 
-# 2. API Key 取得邏輯 (優先讀取 Secrets，若無則使用側邊欄)
+# 2. API Key 取得邏輯
 api_key = st.secrets.get("GOOGLE_API_KEY") or st.sidebar.text_input("輸入 Gemini API Key", type="password")
 
 # 3. 側邊欄：檔案上傳
@@ -33,7 +33,8 @@ if uploaded_file and api_key:
         
         # 使用 try-except 捕捉 API 錯誤
         try:
-            llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", google_api_key=api_key)
+            # 已經將模型名稱改為 models/gemini-1.5-flash 以解決 404 問題
+            llm = ChatGoogleGenerativeAI(model="models/gemini-1.5-flash", google_api_key=api_key)
             
             user_query = st.text_input("請輸入問題")
             if user_query:
@@ -42,7 +43,7 @@ if uploaded_file and api_key:
                     response = llm.invoke(prompt)
                     st.write(response.content)
         except Exception as e:
-            st.error(f"AI 連線失敗 (請檢查 API Key 是否有效，或該專案是否已啟用 Generative Language API): {str(e)}")
+            st.error(f"AI 連線失敗: {str(e)}")
 
 elif not api_key:
     st.warning("請在側邊欄輸入 API Key 以開始使用")
