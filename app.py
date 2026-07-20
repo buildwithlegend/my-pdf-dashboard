@@ -33,8 +33,13 @@ if uploaded_file and api_key:
         
         # 使用 try-except 捕捉 API 錯誤
         try:
-            # 已經將模型名稱改為 models/gemini-1.5-flash 以解決 404 問題
-            llm = ChatGoogleGenerativeAI(model="models/gemini-1.5-flash", google_api_key=api_key)
+            # 針對 Google Cloud Vertex AI 金鑰的修正設定
+            # 若你在其他地區(非 us-central1)，請將 location 修改為對應地區
+            llm = ChatGoogleGenerativeAI(
+                model="gemini-1.5-flash", 
+                google_api_key=api_key,
+                location="us-central1"
+            )
             
             user_query = st.text_input("請輸入問題")
             if user_query:
