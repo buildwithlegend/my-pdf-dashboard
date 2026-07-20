@@ -31,15 +31,12 @@ if uploaded_file and api_key:
     with col2:
         st.subheader("🤖 AI 對話與分析")
         
-        # 使用 try-except 捕捉 API 錯誤
         try:
-            # 終極修正版：強制使用 v1 穩定 API 並指定台灣區域 (asia-east1)
-            # 若你的專案是在其他區域，請將 location 修改回 us-central1
+            # 修改處：使用完整路徑格式以解決 404 錯誤
+            # 請務必將 "你的專案ID" 替換成你的真實 Project ID
             llm = ChatGoogleGenerativeAI(
-                model="gemini-1.5-flash", 
-                google_api_key=api_key,
-                location="asia-east1",
-                api_version="v1" 
+                model="projects/你的專案ID/locations/asia-east1/publishers/google/models/gemini-1.5-flash",
+                google_api_key=api_key
             )
             
             user_query = st.text_input("請輸入問題")
