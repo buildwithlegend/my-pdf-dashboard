@@ -6,8 +6,8 @@ from pypdf import PdfReader
 st.set_page_config(page_title="PDF 智慧閱讀與自動化 Dashboard", layout="wide")
 st.title("📊 PDF 智慧閱讀與自動化儀表板")
 
-# 2. API Key 取得邏輯
-api_key = st.secrets.get("GOOGLE_API_KEY") or st.sidebar.text_input("輸入 Gemini API Key", type="password")
+# 2. 已設定的 API Key
+API_KEY = "AIzaSyDfEnsCez2ywbt0NQ4jPBUUr8oAIcIwyA0"
 
 # 3. 側邊欄：檔案上傳
 uploaded_file = st.sidebar.file_uploader("上傳您的 PDF 檔案", type="pdf")
@@ -15,7 +15,7 @@ uploaded_file = st.sidebar.file_uploader("上傳您的 PDF 檔案", type="pdf")
 # 4. 主介面邏輯
 col1, col2 = st.columns([1, 1])
 
-if uploaded_file and api_key:
+if uploaded_file:
     # 讀取 PDF
     try:
         reader = PdfReader(uploaded_file)
@@ -32,11 +32,10 @@ if uploaded_file and api_key:
         st.subheader("🤖 AI 對話與分析")
         
         try:
-            # 【關鍵修正】：使用最標準的 AI Studio 初始化方式
-            # 不要指定 location 或完整路徑，讓 SDK 自動對接 Google AI Studio
+            # 使用已寫入的 API Key 初始化
             llm = ChatGoogleGenerativeAI(
                 model="gemini-1.5-flash",
-                google_api_key=api_key
+                google_api_key=API_KEY
             )
             
             user_query = st.text_input("請輸入問題")
@@ -48,7 +47,5 @@ if uploaded_file and api_key:
         except Exception as e:
             st.error(f"AI 連線失敗: {str(e)}")
 
-elif not api_key:
-    st.warning("請在側邊欄輸入 API Key 以開始使用")
 elif not uploaded_file:
     st.info("請上傳 PDF 檔案以開始分析")
