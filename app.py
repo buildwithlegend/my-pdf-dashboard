@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 from langchain_google_genai import ChatGoogleGenerativeAI
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 
 # 1. 頁面配置
 st.set_page_config(page_title="PDF 智慧閱讀與自動化 Dashboard", layout="wide")
